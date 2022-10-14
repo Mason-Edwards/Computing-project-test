@@ -1,0 +1,22 @@
+FROM influxdb
+
+# Set enviroment variables
+ARG username=admin
+ARG password=admin123
+ARG org=defaultOrg
+ARG bucket=defaultBucket
+ARG retention=0
+# If no token is passed in then the environment variable in the container will be empty.
+# This means that influxdb will generate its own token.
+ARG token
+
+# Setting environment variables needed to automatically configure influxdb
+ENV DOCKER_INFLUXDB_INIT_MODE=setup
+ENV DOCKER_INFLUXDB_INIT_USERNAME=${username}
+ENV DOCKER_INFLUXDB_INIT_PASSWORD=${password}
+ENV DOCKER_INFLUXDB_INIT_ORG=${org}
+ENV DOCKER_INFLUXDB_INIT_BUCKET=${bucket}
+ENV DOCKER_INFLUXDB_INIT_RETENTION=${retention}
+ENV DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${token}
+CMD ["influxd"]
+EXPOSE 8086

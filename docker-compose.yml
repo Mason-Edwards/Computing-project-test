@@ -1,0 +1,27 @@
+version: '3.9'
+services:
+  influxdb:
+    build:
+      dockerfile: influxdbDockerfile
+
+      # Remove after testing
+      args:
+        token: mGKNA3ucyOT2rnIuxmGYQAbnrYkBGaT0Piiotl2AFurXVbCl8ExjRok5I9IKI5f94prJziCGSezz7J_JQUGkBg==
+    ports:
+      - "8086:8086"
+    volumes:
+      - influxdbv1:/var/lib/influxdb
+      - influxdbv2:/var/lib/influxdb2
+      - influxdbconfig:/etc/influxdb2
+    container_name: influxdb
+  zookeeper:
+    image: wurstmeister/zookeeper
+    container_name: zookeeper
+  kafka:
+    build:
+      dockerfile: kafkaDockerfile
+    container_name: kafka
+volumes:
+  influxdbv1:
+  influxdbv2:
+  influxdbconfig:
