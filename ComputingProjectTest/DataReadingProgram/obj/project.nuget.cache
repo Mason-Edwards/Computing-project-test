@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "1SQvBLMfZGnLBTb8Z8nhhRr7R38/lU0Jqdsup0ATKo6P6QnsGp/g6WaFcTgJbzjAGbVF5sqJByuVqds3xK0a4g==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Mason\\OneDrive - Oxford Brookes University\\Year 4\\Computing Project\\Computing-project-test\\ComputingProjectTest\\DataReadingProgram\\DataReadingProgram.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Mason\\.nuget\\packages\\confluent.kafka\\1.9.3\\confluent.kafka.1.9.3.nupkg.sha512",
+    "C:\\Users\\Mason\\.nuget\\packages\\librdkafka.redist\\1.9.2\\librdkafka.redist.1.9.2.nupkg.sha512",
+    "C:\\Users\\Mason\\.nuget\\packages\\system.memory\\4.5.0\\system.memory.4.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
