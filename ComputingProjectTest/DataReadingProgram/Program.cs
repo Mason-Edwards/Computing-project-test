@@ -12,7 +12,7 @@ var config = new ConsumerConfig
 using (var consumer = new ConsumerBuilder<Ignore, string>(config).Build())
 {
     consumer.Subscribe(new List<string> { "TelemetryData" });
-
+        
 
     // Consumer Loop
     while(true)
