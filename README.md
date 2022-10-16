@@ -141,6 +141,17 @@ Automatically creates a topic called TelemetryData with 1 partition and 1 replic
 # How to write to the kafka topic.
 When Kafka is setup, you can publish and consume to and from the Kafka broker in the same way you would do any other way, you just have to ensure that you have the correct host/IP address and port in the "--broker-list" argument of the bat/shell files, or "BootstrapServers" in the case of using the Confluent.Kafka NuGet package.
 
+# Publishing and consuming to or from a kafka topic hosted on another machine.
+This can be done easily on the same network. Once the port of the container has been mapped to a port on the host machine and Kafka is listening to that port (via KAFKA_LISTENERS environmen variable), other machines on the network can use the IP of the host machine and the mapped port to publish and consume to a topic. It is important to note though that the `KAFKA_ADVERTISED_LISTENERS` should point to the servers IP address and kafka port and not localhost. localhost works fine if the broker is on the machine that the client is on, however, in the case that the broker is on a server and the client is on another machine, the broker will tell the client that it can be reached on localhost, the client will then contact localhost (itself) instead of the IP that the broker is actually on.
+
+# Setup of server and client
+In the docker compose for the kafka container there are 3 listeners: `INSIDE`, `OUTSIDE`, and `EXTERNAL`. INSIDE is for clients inside a docker container as `INSIDE` points to `kafka:9093`. `OUTSIDE` is for clients outside of docker, that being the host machine, which points to `localhost:9092` which is mapped to the containers port 9092. Then there is `EXTERNAL` which is for machines on the same network. The port 9094 on the host machine is mapped to port 9094 in the container which kafka is binded to, the advertised listener for `EXTERNAL` is pointing to the IP of the server machine for the reasons stated in the above section. 
+
+Clients that are not on the server machine must use the `EXTERNAL` listener by hitting port 9094 of the server machine. An example of this being done via the command line:
+```
+./kafka-console-producer.sh --bootstrap-server 192.168.0.38:9094 --topic TelemetryData
+```
+
 # Telegraf
 ## What is Telegraf?
 "Telegraf is an open source plugin-driven server agent for collecting and reporting metrics"
